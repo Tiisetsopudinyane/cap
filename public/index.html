@@ -77,16 +77,23 @@
           video.loadPixels();
           //console.log(video.canvas.toDataURL())
           image64 = video.canvas.toDataURL();
+
+          //image64 is binary data for image and can be sent and saved to database
           data = { first_name,last_name,StuNo, image64 };
-          console.log(data)
+
+          //console.log(data)
           images.src=data.image64;
           document.body.appendChild(images)
+
+          //this is suppose to send the data with the API end point but it doesnt work at all
           axios 
           .get(`/api?first_name=${first_name}&last_name=${last_name}&StuNo=${StuNo}&image64=${image64}`)
           .then(result=>{
-            console.log(first_name)
-            //console.log(image64)
+            result.data.message
           })
+
+
+
           /*const options = {
             method: "POST",
             headers: {
