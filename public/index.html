@@ -56,64 +56,17 @@
                 class="form-control textBox"
               />
             </div>
+            
+          </div>
+          <div class="label"> 
+            <input id="inputFileToLoad" type="file" x-on:change.debounce="encodeImageFileAsURL"/>
+            <br>
+            <div id="imgTest"></div>
           </div>
         </div>
       </form>
     </div>
     <button x-on:click="upload">submit</button>
 
-
-    <script>
-      
-      function setup() {
-        noCanvas();
-        const video = createCapture(VIDEO);
-        video.size(260, 220);
-              let button= document.getElementById("submit");
-      
-      let data={};
-        button.addEventListener("click", async (event) => {
-          let first_name=document.getElementById("fname").value;
-      let last_name=document.getElementById("lname").value;
-      let StuNo=document.getElementById("StuNo").value;
-      let images=document.createElement('img');
-      let image64="";
-          video.loadPixels();
-          //console.log(video.canvas.toDataURL())
-          image64 = video.canvas.toDataURL();
-
-          //image64 is binary data for image and can be sent and saved to database
-          data = { first_name,last_name,StuNo, image64 };
-
-          //console.log(data)
-          images.src=data.image64;
-          document.body.appendChild(images)
-
-          //this is suppose to send the data with the API end point but it doesnt work at all
-          axios 
-          .get(`/api?first_name=${first_name}&last_name=${last_name}&StuNo=${StuNo}&image64=${image64}`)
-          .then(result=>{
-            result.data.message
-          })
-
-
-
-          /*const options = {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            query: JSON.stringify(data),
-          };
-          const response = await fetch("/api", options);
-          const json = await response.json();
-          
-          //console.log(response.data);
-          console.log(data);*/
-        });
-      }
-      
-      
-    </script>
   </body>
 </html>

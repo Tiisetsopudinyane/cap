@@ -15,8 +15,12 @@ app.post('/api/data',async function (req,res){
     const photo=req.body.photo;
 
   // await insert(first_name,last_name,stuNo,photo);
-  const data = await insert(first_name, last_name, stuNo, photo) 
-  console.log(data)
+  
+  //
+  //i commented this await insert method to stop the API from storing the data for now
+  //
+  //await insert(first_name, last_name, stuNo, photo) 
+    
   res.json({
     "message":"inserted"
   })
