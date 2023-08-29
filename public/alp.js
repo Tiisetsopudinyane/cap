@@ -9,15 +9,19 @@ document.addEventListener("alpine:init",()=>{
             output:'',
             init(){
                 return axios
-                .get('/api/getData')
+                .get('/api/fetching')
                 .then((result)=>{
                     this.myData=result.data.getdata;
                 })
             },
              
             upload(){
-                return axios
-                .post(`/api/upload?first_name=${this.first_name}&last_name=${this.last_name}&stuNo=${this.stuNo}&photo=${this.photo}`)
+                axios.post('/api/data', {
+                    first_name : this.first_name,
+                    last_name : this.last_name,
+                    stuNo : this.stuNo,
+                    photo : this.photo
+                })
                 .then(result=>{
                     this.output=result.data.message;
                 })

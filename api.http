@@ -1,0 +1,13 @@
+GET http://localhost:4021/api/fetching
+
+###
+
+POST http://localhost:4021/api/data
+Content-Type: application/json
+
+{
+    "first_name" : "Xolani",
+    "last_name" : "Sibisi",
+    "stuNo" : 223262588,
+    "photo" : "c:/Users/Gennifer Motsumi/Downloads/xolani.png"
+}

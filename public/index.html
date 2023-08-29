@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <script src="alp.js"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="style.css"></link>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
   </head>
-  <body>
+  <body x-data="myData">
     <div class="myForm">
       <div id="img"></div>
-      <form action="/submit">
+      <form>
         <div class="form">
           <div class="label">
             <div class="inner">
@@ -21,7 +22,8 @@
             <div class="inner">
               <input
                 type="text"
-                id="fname"
+                x-model="first_name"
+                id="first_name"
                 name="fname"
                 class="form-control textBox"
               />
@@ -34,7 +36,8 @@
             <div class="inner">
               <input
                 type="text"
-                id="lname"
+                x-model="last_name"
+                id="last_name"
                 name="lname"
                 class="form-control textBox"
               />
@@ -47,7 +50,8 @@
             <div class="inner">
               <input
                 type="text"
-                id="StuNo"
+                x-model="stuNo"
+                id="stuNo"
                 name="StuNo"
                 class="form-control textBox"
               />
@@ -56,7 +60,7 @@
         </div>
       </form>
     </div>
-    <button id="submit">submit</button>
+    <button x-on:click="upload">submit</button>
 
 
     <script>
