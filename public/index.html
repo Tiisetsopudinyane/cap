@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"></link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
+  </head>
+  <body>
+    <div class="myForm">
+      <div id="img"></div>
+      <form action="/submit">
+        <div class="form">
+          <div class="label">
+            <div class="inner">
+              <label for="fname" class="textBox">First name:</label>
+            </div>
+            <div class="inner">
+              <input
+                type="text"
+                id="fname"
+                name="fname"
+                class="form-control textBox"
+              />
+            </div>
+          </div>
+          <div class="label">
+            <div class="inner">
+              <label for="lname" class="textBox">Last name:</label>
+            </div>
+            <div class="inner">
+              <input
+                type="text"
+                id="lname"
+                name="lname"
+                class="form-control textBox"
+              />
+            </div>
+          </div>
+          <div class="label">
+            <div class="inner">
+              <label for="StuNo" class="textBox">Student Number:</label>
+            </div>
+            <div class="inner">
+              <input
+                type="text"
+                id="StuNo"
+                name="StuNo"
+                class="form-control textBox"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <button id="submit">submit</button>
+
+
+    <script>
+      
+      function setup() {
+        noCanvas();
+        const video = createCapture(VIDEO);
+        video.size(260, 220);
+              let button= document.getElementById("submit");
+      
+      let data={};
+        button.addEventListener("click", async (event) => {
+          let first_name=document.getElementById("fname").value;
+      let last_name=document.getElementById("lname").value;
+      let StuNo=document.getElementById("StuNo").value;
+      let images=document.createElement('img');
+      let image64="";
+          video.loadPixels();
+          //console.log(video.canvas.toDataURL())
+          image64 = video.canvas.toDataURL();
+          data = { first_name,last_name,StuNo, image64 };
+          console.log(data)
+          images.src=data.image64;
+          document.body.appendChild(images)
+          axios 
+          .get(`/api?first_name=${first_name}&last_name=${last_name}&StuNo=${StuNo}&image64=${image64}`)
+          .then(result=>{
+            console.log(first_name)
+            //console.log(image64)
+          })
+          /*const options = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            query: JSON.stringify(data),
+          };
+          const response = await fetch("/api", options);
+          const json = await response.json();
+          
+          //console.log(response.data);
+          console.log(data);*/
+        });
+      }
+      
+      
+    </script>
+  </body>
+</html>
